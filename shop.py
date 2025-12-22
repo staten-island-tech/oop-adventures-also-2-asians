@@ -16,8 +16,19 @@ weapontype=[
         "type": "staff"
     }
 ]
-#classes knight fighter mage
+testinv=[]
+#classes: knight fighter mage
 
 class shop:
-    def weaponshop(self, money, inv, weapon):
-        
+    def weaponshop(inv):
+        print("Buy a weapon... but choose wisely:")
+        for index, i in enumerate(weapontype, start=1):
+            print(f"{index}. {i}")
+        choice=int(input("type the number: "))
+        testinv.append(weapontype[choice-1])
+        print(f"Current Inventory: {testinv}")
+    weaponshop(testinv)
+
+    def smithy(inv):
+        if self.inv:
+        print("if you wanna upgrade your current weapon you will need ")
