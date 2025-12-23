@@ -42,6 +42,8 @@ testinv=[]
 #classes: knight fighter mage
 
 class shop(Class):
+    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs):
+        
     def genstore(phydmg, rngdmg, mgcdmg, inv):
         later
     def weaponshop(inv):
