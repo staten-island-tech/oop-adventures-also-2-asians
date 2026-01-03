@@ -43,10 +43,9 @@ testinv=[]
 
 class shop(Class):
     def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs):
-        
-    def genstore(phydmg, rngdmg, mgcdmg, inv):
-        later
-    def weaponshop(inv):
+        super().__init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs)
+    
+    def weaponshop(self):
         print("Buy a weapon... but choose wisely:")
         for index, i in enumerate(weapontype, start=1):
             print(f"{index}. {i}")
@@ -56,7 +55,7 @@ class shop(Class):
         self.rngdmg+=weapontype[choice-1]['rngdmg']
         self.mgcdmg+=weapontype[choice-1]['mgcdmg']
         print(f"Current Inventory: {testinv}")
-    weaponshop(testinv)
+    
 
     def smithy(inv):
         startingweapon=inv[1]
