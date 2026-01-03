@@ -41,6 +41,8 @@ resources=[
 testinv=[]
 #classes: knight fighter mage
 
+#I FORGOT HOW TO GET THE [CLASS] class FROM CHARACTER.PY AHHHHHHHHHH
+
 class shop(Class):
     def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs):
         super().__init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs)
