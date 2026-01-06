@@ -43,20 +43,17 @@ resources=[
 
 #classes: knight fighter mage
 
+#
 
 #I FORGOT HOW TO GET THE [CLASS] class FROM CHARACTER.PY AHHHHHHHHHH
 
 class shop(Class):
-    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped):
+    def __init__(self, equipped, inv, name, money, hp, phydmg, rngdmg, mgcdmg, mana, race, classs):
         super().__init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs)
         self.equipped=equipped
-    invlist=[]
-    currentequip=[]
     def weaponshop(self):
-        self.inv=invlist
-        self.equipped=currentequip
         print("Buy a weapon... but choose wisely:")
-        for index, i in enumerate(weapontype, start=1):
+        for index, i in enumerate(weapontype, start=1): 
             print(f"{index}. {i}")
         choice=int(input("type the number: "))
         #subtract the previously chosen weapon stats from character stats
@@ -65,8 +62,11 @@ class shop(Class):
         self.rngdmg+=weapontype[choice-1]['rngdmg']
         self.mgcdmg+=weapontype[choice-1]['mgcdmg']
         print(f"Current Inventory: {self.inv}")
-    
 
-    def smithy(inv):
-        startingweapon=
-        print("if you wanna upgrade your current weapon you will need ")
+    def smithy(self):
+        upgradecounter=0
+        if self.equipped['name']==weapontype[0]['name']:
+            print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
+    #def genstore():
+
+self= shop([weapontype[0]], [])
