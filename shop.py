@@ -47,10 +47,10 @@ resources=[
 
 #I FORGOT HOW TO GET THE [CLASS] class FROM CHARACTER.PY AHHHHHHHHHH
 
-class shop(Class):
-    def __init__(self, equipped, inv, name, money, hp, phydmg, rngdmg, mgcdmg, mana, race, classs):
-        super().__init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs)
-        self.equipped=equipped
+class shop():
+    def __init__(self):
+        super().__init__(self)
+        
     def weaponshop(self):
         print("Buy a weapon... but choose wisely:")
         for index, i in enumerate(weapontype, start=1): 
@@ -67,9 +67,12 @@ class shop(Class):
         print("if you wanna upgrade your current weapon you will need ")
     def smithy(self):
         upgradecounter=0
-        if self.equipped['name']==weapontype[0]['name']:
-            print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
+        # if self.equipped['name']==weapontype[0]['name']:
+        #     print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
     #def genstore():
+    userinput = input("x")
+    if userinput == "x":
+        self.weaponshop()
 
-self= shop([weapontype[0]], [])
+
 
