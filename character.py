@@ -71,10 +71,16 @@ while True:
         print("Answer not reconized, please try again.")
 
 while True:
-    user_input = input("Please choose a class for your character, remember that some classes wont be capable of becoming specific classes.")
+    user_input = input("Please choose a class for your character, remember that some classes wont be capable of becoming specific classes. - Warrior - Archer - Mage -")
     if user_input == "Warrior":
         self.Warrior()
+        print("Class chosen: Warrior")
+        break
     elif user_input == "Archer" and self.race != ["Demon"]:
         self.Archer()
+        print("Class Chosen: Archer")
+        break
     elif user_input == "Mage" and self.race != ["Demon"]:
         self.Mage()
+        print("Class Chosen: Mage")
+        break
