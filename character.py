@@ -44,6 +44,49 @@ resources=[
 =======
 >>>>>>> character
 
+weapontype=[
+    {
+        "name": "rusty sword",
+        "phydmg": 3,
+        "mgcdmg": 0,
+        "rngdmg": 0,
+        "type": "sword"
+    },
+    {
+        "name": "rusty gaunlet",
+        "physdmg": 4,
+        "mgcdmg": 0,
+        "rngdmg": 0,
+        "type": "fists"
+    },
+    {
+        "name": "basic staff",
+        "physdmg": 0,
+        "mgcdmg": 5,
+        "rngdmg": 3,
+        "type": "staff"
+    }
+]
+resources=[
+    {
+    "name": "Iron",
+    "amount": 1,
+    "type": "Metal",
+    },
+    {
+    "name": "Wood",
+    "amount": 1,
+    "type": "Wood",
+    },
+    {
+    "name": "Copper",
+    "amount": 1,
+    "type": "Metal",
+    }
+]
+
+
+
 class Class:
     def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs):
         self.name = name
