@@ -1,4 +1,4 @@
-#ryu0702
+
 
 class Class:
     def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs):
