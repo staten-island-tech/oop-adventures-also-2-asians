@@ -111,6 +111,8 @@ class shop(Class):
         upgradecounter=0
         if self.equipped['name']==weapontype[0]['name']:
             print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
+        if self.equipped['name']==weapontype[1]['name']:
+            print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
     #def genstore():
 
 
