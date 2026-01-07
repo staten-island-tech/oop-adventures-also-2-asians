@@ -1,4 +1,3 @@
-from character import Class
 class Stats(Class):
     def __init__(self, strength, defense, durability, mana):
         self.strength = strength
