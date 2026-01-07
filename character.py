@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 weapontype=[
     {
         "name": "rusty sword",
@@ -40,6 +41,8 @@ resources=[
     }
 ]
 
+=======
+>>>>>>> character
 
 class Class:
     def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs):
