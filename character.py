@@ -44,7 +44,7 @@ resources=[
 
 
 class Class:
-    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs):
+    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped):
         self.name = name
         self.money = money
         self.hp = hp
@@ -55,6 +55,7 @@ class Class:
         self.inv = inv
         self.race = race
         self.classs = classs
+        self.equipped = equipped
     def human(self):
         self.money += 24
         self.hp += 99
@@ -92,11 +93,6 @@ class Class:
         self.mgcdmg += 1
         self.mana += 5
 
-class shop(Class):
-    def __init__(self, equipped):
-        super().__init__(self)
-        self.equipped=equipped
-        self= shop([])
     def weaponshop(self):
         print("Buy a weapon... but choose wisely:")
         for index, i in enumerate(weapontype, start=1): 
@@ -117,11 +113,7 @@ class shop(Class):
             print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
     #def genstore():
 
-
-
-
-
-self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [])
+self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [])
 
 while True:
     user_input = input("Please choose a race!: Human, Demon, Angel, Dwarf - Remember you will not be able to change these later on. Keep in mind each race will have their own buffs/debuffs. If you would like to get info about these races, please type 'info'").lower()
