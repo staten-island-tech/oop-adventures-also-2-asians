@@ -1,32 +1,49 @@
+
+from character import Class
 mobs = [
     {
     "name" : "bandit",
     "damage" : 4,
     "health" : 25,
-    "def" : 0
+    "def" : 0,
+    "exp" : 10
 },
 {
     "name" : "rouge",
     "damage" : 6,
     "health" : 20,
-    "def" : 0
+    "def" : 0,
+    "exp" : 12
 },
 {
     "name" : "Outcast",
     "damage" : 2,
     "health" : 10,
-    "def" : -1
+    "def" : -1,
+    "exp" : 5
+},
+{
+    "name" : "Swordsman",
+    "damage" : 5,
+    "health" : 25,
+    "def" : 2,
+    "exp" : 20
+},
+{
+    "name" : "Guard",
+    "damage" : 7,
+    "health" : 50,
+    "def" : 3,
+    "exp" : 30
 }
     ]
 
-class Levels():
-     def levelsystem(self, exp):
-        self.exp = exp
+class Levels(Class):
+     def levelsystem(self):
         level = 1
-        expamt = 100
-        if self.exp >= expamt:
+        if self.exp >= self.expamt:
             level += 1
-            exp -= expamt
-            expamt * 1.1
+            self.exp -= self.expamt
+            self.expamt * 1.1
         else:
-            print(f"Exp requirement not met: You need {expamt} total exp!")
+            print(f"Exp requirement not met: You need {self.expamt} total exp!")
