@@ -18,3 +18,15 @@ mobs = [
     "def" : -1
 }
     ]
+
+class Levels():
+     def levelsystem(self, exp):
+        self.exp = exp
+        level = 1
+        expamt = 100
+        if self.exp >= expamt:
+            level += 1
+            exp -= expamt
+            expamt * 1.1
+        else:
+            print(f"Exp requirement not met: You need {expamt} total exp!")
