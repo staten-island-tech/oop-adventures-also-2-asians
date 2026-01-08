@@ -1,5 +1,3 @@
-
-
 weapontype=[
     {
         "name": "rusty sword",
