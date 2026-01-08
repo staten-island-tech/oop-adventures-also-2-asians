@@ -1,4 +1,4 @@
-main
+
 weapontype=[
     {
         "name": "rusty sword",
@@ -9,14 +9,14 @@ weapontype=[
     },
     {
         "name": "rusty gaunlet",
-        "physdmg": 4,
+        "phydmg": 4,
         "mgcdmg": 0,
         "rngdmg": 0,
         "type": "fists"
     },
     {
         "name": "basic staff",
-        "physdmg": 0,
+        "phydmg": 0,
         "mgcdmg": 5,
         "rngdmg": 3,
         "type": "staff"
@@ -96,14 +96,22 @@ class Class:
         print("Buy a weapon... but choose wisely:")
         for index, i in enumerate(weapontype, start=1): 
             print(f"{index}. {i}")
-        choice=int(input("type the number: "))
+        choice=int(input("type the #: "))
         #subtract the previously chosen weapon stats from character stats
         self.inv.append(weapontype[choice-1])
         self.phydmg+=weapontype[choice-1]['phydmg']
         self.rngdmg+=weapontype[choice-1]['rngdmg']
         self.mgcdmg+=weapontype[choice-1]['mgcdmg']
         print(f"Current Inventory: {self.inv}")
-    
+    def equipping(self):
+        print("Which weapon do you wanna equip?")
+        for index, i in enumerate(self.inv, start=1): 
+            print(f"{index}. {i['name']}")
+            choice=input("type the name: ")
+            #ayaan proof this later
+
+            if [choice] == i in weapontype['name']:
+                equipped.append()
 
     def smithy(self):
         upgradecounter=0
@@ -118,7 +126,7 @@ class Class:
 self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [])
 
 while True:
-    user_input = input("Please choose a race!: Human, Demon, Angel, Dwarf - Remember you will not be able to change these later on. Keep in mind each race will have their own buffs/debuffs. If you would like to get info about these races, please type 'info'").lower()
+    user_input = input("Please choose a race!: Human, Demon, Angel, Dwarf - Remember you will not be able to change these later on. Keep in mind each race will have their own buffs/debuffs. If you would like to get info about these races, please type 'info' ").lower()
     if user_input == "info":
         print("The human class, the jack of all trades - master of none. This race is capable of becoming all of the classes, and poses no debuffs. All stats of this race are default. The demon class is a master of combat, specializing in close ranged physical fights. The demon class has high damage and a special ability, but sacrifices some health for it. Demon is incapable of using ranged weapons. The angel race is similar to the human race, but has a few passives and abilities. The angel is capable of using its wings to dodge attacks and is eligible to use all types of weapons and is stronger with magic type attacks. The dwarf race specializes in ranged combat, being small enough to evade attacks. The dwarf class is weaker with physical weapons, and stronger with ranged weapons.")
     elif user_input == "human":
