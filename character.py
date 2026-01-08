@@ -1,5 +1,4 @@
-
-<<<<<<< HEAD
+main
 weapontype=[
     {
         "name": "rusty sword",
@@ -30,46 +29,7 @@ resources=[
     "type": "Metal",
     },
     {
-    "name": "Wood",
-    "amount": 1,
-    "type": "Wood",
-    },
-    {
     "name": "Copper",
-    "amount": 1,
-    "type": "Metal",
-    }
-]
-
-=======
->>>>>>> character
-
-weapontype=[
-    {
-        "name": "rusty sword",
-        "phydmg": 3,
-        "mgcdmg": 0,
-        "rngdmg": 0,
-        "type": "sword"
-    },
-    {
-        "name": "rusty gaunlet",
-        "physdmg": 4,
-        "mgcdmg": 0,
-        "rngdmg": 0,
-        "type": "fists"
-    },
-    {
-        "name": "basic staff",
-        "physdmg": 0,
-        "mgcdmg": 5,
-        "rngdmg": 3,
-        "type": "staff"
-    }
-]
-resources=[
-    {
-    "name": "Iron",
     "amount": 1,
     "type": "Metal",
     },
@@ -77,18 +37,13 @@ resources=[
     "name": "Wood",
     "amount": 1,
     "type": "Wood",
-    },
-    {
-    "name": "Copper",
-    "amount": 1,
-    "type": "Metal",
     }
 ]
 
 
 
 class Class:
-    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs):
+    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped):
         self.name = name
         self.money = money
         self.hp = hp
@@ -99,6 +54,7 @@ class Class:
         self.inv = inv
         self.race = race
         self.classs = classs
+        self.equipped = equipped
     def human(self):
         self.money += 24
         self.hp += 99
@@ -136,11 +92,6 @@ class Class:
         self.mgcdmg += 1
         self.mana += 5
 
-class shop(Class):
-    def __init__(self, equipped):
-        super().__init__(self)
-        self.equipped=equipped
-        self= shop([])
     def weaponshop(self):
         print("Buy a weapon... but choose wisely:")
         for index, i in enumerate(weapontype, start=1): 
@@ -152,20 +103,19 @@ class shop(Class):
         self.rngdmg+=weapontype[choice-1]['rngdmg']
         self.mgcdmg+=weapontype[choice-1]['mgcdmg']
         print(f"Current Inventory: {self.inv}")
+    
 
     def smithy(self):
         upgradecounter=0
         if self.equipped['name']==weapontype[0]['name']:
-            print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
+            print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[0]['name']}")
         if self.equipped['name']==weapontype[1]['name']:
-            print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
+            print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[1]['name']}")
+        if self.equipped['name']==weapontype[2]['name']:
+            print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[2]['name']}")
     #def genstore():
 
-
-
-
-
-self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [])
+self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [])
 
 while True:
     user_input = input("Please choose a race!: Human, Demon, Angel, Dwarf - Remember you will not be able to change these later on. Keep in mind each race will have their own buffs/debuffs. If you would like to get info about these races, please type 'info'").lower()
@@ -206,3 +156,4 @@ while True:
     user_input = input("x")
     if user_input== "x":
         self.weaponshop()
+        self.equipping()
