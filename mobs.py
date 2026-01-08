@@ -1,5 +1,3 @@
-
-from character import Class
 mobs = [
     {
     "name" : "bandit",
@@ -23,7 +21,7 @@ mobs = [
     "exp" : 5
 },
 {
-    "name" : "Swordsman",
+    "name" : "Squire",
     "damage" : 5,
     "health" : 25,
     "def" : 2,
@@ -35,10 +33,24 @@ mobs = [
     "health" : 50,
     "def" : 3,
     "exp" : 30
+},
+{
+    "name" : "Knight",
+    "damage" : 10,
+    "health" : 100,
+    "def" : 5,
+    "exp" : 50
+},
+{
+    "name" : "Royal Guard",
+    "damage" : 12,
+    "health" : 250, 
+    "def" : 7
+    "exp" : 125
 }
     ]
 
-class Levels(Class):
+class Levels:
      def levelsystem(self):
         level = 1
         if self.exp >= self.expamt:
