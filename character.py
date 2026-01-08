@@ -1,3 +1,4 @@
+main
 weapontype=[
     {
         "name": "rusty sword",
