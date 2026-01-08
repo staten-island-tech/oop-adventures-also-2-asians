@@ -59,3 +59,7 @@ class Levels:
             self.expamt * 1.1
         else:
             print(f"Exp requirement not met: You need {self.expamt} total exp!")
+
+def attackfunc(self):
+    userinput = input("What mob would you like to attack?")
+    for i in enumerate
