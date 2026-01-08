@@ -45,7 +45,7 @@ mobs = [
     "name" : "Royal Guard",
     "damage" : 12,
     "health" : 250, 
-    "def" : 7
+    "def" : 7,
     "exp" : 125
 }
     ]
