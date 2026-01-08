@@ -74,14 +74,14 @@ resources=[
     "type": "Metal",
     },
     {
-    "name": "Wood",
-    "amount": 1,
-    "type": "Wood",
-    },
-    {
     "name": "Copper",
     "amount": 1,
     "type": "Metal",
+    },
+    {
+    "name": "Wood",
+    "amount": 1,
+    "type": "Wood",
     }
 ]
 
@@ -148,13 +148,16 @@ class Class:
         self.rngdmg+=weapontype[choice-1]['rngdmg']
         self.mgcdmg+=weapontype[choice-1]['mgcdmg']
         print(f"Current Inventory: {self.inv}")
+    
 
     def smithy(self):
         upgradecounter=0
         if self.equipped['name']==weapontype[0]['name']:
-            print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
+            print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[0]['name']}")
         if self.equipped['name']==weapontype[1]['name']:
-            print("if you wanna upgrade your current weapon you will need enough resources: 10 metal")
+            print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[1]['name']}")
+        if self.equipped['name']==weapontype[2]['name']:
+            print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[2]['name']}")
     #def genstore():
 
 self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [])
@@ -198,3 +201,4 @@ while True:
     user_input = input("x")
     if user_input== "x":
         self.weaponshop()
+        self.equipping()
