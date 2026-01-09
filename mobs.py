@@ -76,7 +76,3 @@ def fbandit(self):
         self.phydmg() * xdmg * self.strength
     elif userinput == "Attack".lower() and classs != ["Mage"]:
         self.mgcdmg() * mdmg * self.mana
-
-def attackfunc(self):
-    userinput = input("What mob would you like to attack?")
-    for i in enumerate
