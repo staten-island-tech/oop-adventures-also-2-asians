@@ -109,9 +109,15 @@ class Class:
             print(f"{index}. {i['name']}")
             choice=input("type the name: ")
             #ayaan proof this later
-
-            if [choice] == i in weapontype['name']:
-                equipped.append()
+            
+            if choice != i['name'] in self.inv:
+                print("That is not a item you currently have")
+                self.equipping()
+            
+            for i in range(len(self.inv)):
+                if choice== [i] in self.inv and choice==weapontype[i]['name']:
+                    self.equipped.append(weapontype[i],"testing")
+            print(f"currently equipped: {self.equipped}")
 
     def smithy(self):
         upgradecounter=0
