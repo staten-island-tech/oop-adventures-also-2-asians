@@ -5,21 +5,27 @@ weapontype=[
         "phydmg": 3,
         "mgcdmg": 0,
         "rngdmg": 0,
-        "type": "sword"
+        "type": "sword",
+        "genre": "weapon",
+        "price": 40
     },
     {
         "name": "rusty gaunlet",
-        "phydmg": 4,
+        "phydmg": 3,
         "mgcdmg": 0,
         "rngdmg": 0,
-        "type": "fists"
+        "type": "fists",
+        "genre": "weapon",
+        "price": 40
     },
     {
         "name": "basic staff",
         "phydmg": 0,
-        "mgcdmg": 5,
-        "rngdmg": 3,
-        "type": "staff"
+        "mgcdmg": 3,
+        "rngdmg": 0,
+        "type": "staff",
+        "genre": "weapon",
+        "price": 40
     }
 ]
 resources=[
@@ -27,16 +33,20 @@ resources=[
     "name": "Iron",
     "amount": 1,
     "type": "Metal",
+    "genre": "resource"
     },
     {
     "name": "Copper",
     "amount": 1,
     "type": "Metal",
+    "genre": "resource"
+
     },
     {
     "name": "Wood",
     "amount": 1,
     "type": "Wood",
+    "genre": "resource"
     }
 ]
 
@@ -99,24 +109,29 @@ class Class:
         choice=int(input("type the #: "))
         #subtract the previously chosen weapon stats from character stats
         self.inv.append(weapontype[choice-1])
-        self.phydmg+=weapontype[choice-1]['phydmg']
-        self.rngdmg+=weapontype[choice-1]['rngdmg']
-        self.mgcdmg+=weapontype[choice-1]['mgcdmg']
+        
         print(f"Current Inventory: {self.inv}")
+
     def equipping(self):
         print("Which weapon do you wanna equip?")
         for index, i in enumerate(self.inv, start=1): 
-            print(f"{index}. {i['name']}")
-            choice=input("type the name: ")
+            if i['genre'] == "weapon":
+                print(f"{index}. {i['name']}")
+            choice=input("type the name: ").lower()
             #ayaan proof this later
-            
-            if choice != i['name'] in self.inv:
-                print("That is not a item you currently have")
-                self.equipping()
-            
-            for i in range(len(self.inv)):
-                if choice== [i] in self.inv and choice==weapontype[i]['name']:
-                    self.equipped.append(weapontype[i],"testing")
+            for y in range(len(self.inv)):
+                if [choice] != self.inv['name']:
+                    print(y)
+                    print(len(self.inv))
+                    print("That is not a item you currently have")
+                    self.equipping()
+
+            for x in weapontype:
+                if choice in self.inv and choice==x['name'] and weapontype[x]['genre']=="weapon":
+                    self.equipped.append(weapontype[x])
+                    self.phydmg+=weapontype[x]['phydmg']
+                    self.rngdmg+=weapontype[x]['rngdmg']
+                    self.mgcdmg+=weapontype[x]['mgcdmg']
             print(f"currently equipped: {self.equipped}")
 
     def smithy(self):
