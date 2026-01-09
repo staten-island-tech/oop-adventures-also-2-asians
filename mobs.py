@@ -46,6 +46,7 @@ mobs = [
     "damage" : 12,
     "health" : 250, 
     "def" : 7,
+    "def" : 7,
     "exp" : 125
 }
     ]
@@ -59,6 +60,22 @@ class Levels:
             self.expamt * 1.1
         else:
             print(f"Exp requirement not met: You need {self.expamt} total exp!")
+
+def killfunc(self):
+    for index, i in enumerate(mobs):
+        print(f"{index}. {i}")
+    userinput = input("What mob would you like to fight? Please type its number via list!")
+    if userinput == "0":
+        self.fbandit()
+
+def fbandit(self):
+    print("You've encountered a bandit!")
+    bhealth = int(mobs[0]["health"])
+    userinput = input("Please choose an option: Attack, Inventory, Flee")
+    if userinput == "Attack".lower() and classs != ["Mage"]:
+        self.phydmg() * xdmg * self.strength
+    elif userinput == "Attack".lower() and classs != ["Mage"]:
+        self.mgcdmg() * mdmg * self.mana
 
 def attackfunc(self):
     userinput = input("What mob would you like to attack?")
