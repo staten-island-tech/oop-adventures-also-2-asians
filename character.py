@@ -49,8 +49,8 @@ resources=[
     "genre": "resource"
     }
 ]
-
-
+SEW=0
+pastSEW=SEW
 
 class Class:
     def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped):
@@ -111,28 +111,29 @@ class Class:
         self.inv.append(weapontype[choice-1])
         
         print(f"Current Inventory: {self.inv}")
-
+    
     def equipping(self):
+        #Switching Equipped Weapon(SEW)
+        SEW+=1
         print("Which weapon do you wanna equip?")
         for index, i in enumerate(self.inv, start=1): 
             if i['genre'] == "weapon":
                 print(f"{index}. {i['name']}")
             choice=input("type the name: ").lower()
             #ayaan proof this later
-            for y in range(len(self.inv)):
-                if [choice] != self.inv['name']:
-                    print(y)
-                    print(len(self.inv))
-                    print("That is not a item you currently have")
-                    self.equipping()
+            #for y in range(len(self.inv)):
+        if not any(choice == i['name'] for i in self.inv):
+            print("That is not a item you currently have")
+            self.equipping()
+            return
 
-            for x in weapontype:
-                if choice in self.inv and choice==x['name'] and weapontype[x]['genre']=="weapon":
-                    self.equipped.append(weapontype[x])
-                    self.phydmg+=weapontype[x]['phydmg']
-                    self.rngdmg+=weapontype[x]['rngdmg']
-                    self.mgcdmg+=weapontype[x]['mgcdmg']
-            print(f"currently equipped: {self.equipped}")
+        for x in weapontype:
+            if choice==x['name'] and x['genre']=="weapon":
+                self.equipped.append(x)
+                self.phydmg+=x['phydmg']
+                self.rngdmg+=x['rngdmg']
+                self.mgcdmg+=x['mgcdmg']
+        print(f"currently equipped: {self.equipped}")
 
     def smithy(self):
         upgradecounter=0
@@ -186,3 +187,35 @@ while True:
     if user_input== "x":
         self.weaponshop()
         self.equipping()
+
+#using this(below) to help
+# Word Problem: The School Portal Login System
+# Your school is creating a new online portal for students to sign up for accounts. The login system needs a function that accepts two pieces of information from the user:
+# Their email address
+# Their password
+# Before creating the new account, the function must verify that the email and password follow school rules:
+# The email must be a string and must contain an "@" symbol.
+# The password must also be a string.
+# The password must be at least 8 characters long.
+# The password must include at least one number.
+# The password must include at least one uppercase letter.
+# If ANY of these rules are broken, the function should return an error message explaining what went wrong.
+# If EVERYTHING is good, the function should return a dictionary that represents the newly created user.
+
+
+""" def isvalid(email, paswor):
+    if not isinstance(email,str) or not isinstance(paswor,str):
+        return "the email and password is not valid, must be string"
+    if "@" not in email:
+        return "Not valid email, nust have @ symbol"
+    if len(paswor)<8:
+        return "your password must be at least eight characters long"
+    if not any(i.isdigit() for i in paswor):
+        return "your password must have a number"
+    if not any(i.isupper() for i in paswor):
+        return "your password must have a uppercase letter"
+
+
+    
+    return {"email":email, "password":paswor}
+print(isvalid("test123@gamer.com","F2d8layf")) """
