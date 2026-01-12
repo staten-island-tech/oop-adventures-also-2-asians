@@ -49,8 +49,7 @@ resources=[
     "genre": "resource"
     }
 ]
-SEW=0
-pastSEW=SEW
+
 
 class Class:
     def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped):
@@ -114,14 +113,22 @@ class Class:
     
     def equipping(self):
         #Switching Equipped Weapon(SEW)
-        SEW+=1
+        self.phydmg*0.1+1
+        self.rngdmg*0.1+1
+        self.mgcdmg*0.1+1
+        
         print("Which weapon do you wanna equip?")
         for index, i in enumerate(self.inv, start=1): 
             if i['genre'] == "weapon":
                 print(f"{index}. {i['name']}")
-            choice=input("type the name: ").lower()
+        choice=input("type the name: ").lower()
             #ayaan proof this later
             #for y in range(len(self.inv)):
+        
+        if any(choice == i['name'] for i in self.equipped):
+            print("you have already equipped that")
+            self.equipping()
+            return
         if not any(choice == i['name'] for i in self.inv):
             print("That is not a item you currently have")
             self.equipping()
@@ -129,10 +136,13 @@ class Class:
 
         for x in weapontype:
             if choice==x['name'] and x['genre']=="weapon":
+                if len(self.equipped) >
                 self.equipped.append(x)
-                self.phydmg+=x['phydmg']
-                self.rngdmg+=x['rngdmg']
-                self.mgcdmg+=x['mgcdmg']
+                print(self.phydmg,self.rngdmg,self.mgcdmg)
+                self.phydmg + x['phydmg']
+                self.rngdmg+x['rngdmg']
+                self.mgcdmg+x['mgcdmg']
+                print(self.phydmg,self.rngdmg,self.mgcdmg)
         print(f"currently equipped: {self.equipped}")
 
     def smithy(self):
@@ -144,8 +154,11 @@ class Class:
         if self.equipped['name']==weapontype[2]['name']:
             print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[2]['name']}")
     #def genstore():
-
+    
+        
 self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [])
+
+
 
 while True:
     user_input = input("Please choose a race!: Human, Demon, Angel, Dwarf - Remember you will not be able to change these later on. Keep in mind each race will have their own buffs/debuffs. If you would like to get info about these races, please type 'info' ").lower()
@@ -180,6 +193,7 @@ while True:
         self.Mage()
         print("Class Chosen: Mage")
         break
+
 
 #_________________________________________________________________________________________
 while True:
