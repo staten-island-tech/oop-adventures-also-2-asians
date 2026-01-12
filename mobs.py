@@ -1,3 +1,5 @@
+#NZ - B
+
 mobs = [
     {
     "name" : "bandit",
@@ -74,8 +76,8 @@ def killfunc(self):
         enemyexp = int(mobs[x]['exp'])
         enemydmg = int(mobs[x]['damage'])
         enemydef = int(mobs[x]["def"])
-        userinput = input("Please choose an option: Attack, Inventory, Flee")
         while True:
+            userinput = input("Please choose an option: Attack, Inventory, Flee")
             if enemyhealth <= 0:
                 self.money += enemymoney
                 self.exp += enemyexp
@@ -84,8 +86,24 @@ def killfunc(self):
                 return f"The enemy has defeated you! Health remaining: {enemyhealth}"
             elif userinput == "Attack".lower() and classs == ["Warrior"]:
                 xwar = self.phydmg * self.strength
-                enemyhealth -= xwar
-                print("You landed a blow on the enemy! You dealt ")
+                enemyhealth -= xwar - enemydef
+                print(f"You landed a blow on the enemy! You dealt {xwar} damage! Enemy health: {enemyhealth}")
+                charhealth -= enemydmg
+                print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+            elif userinput == "Attack".lower() and classs == ["Archer"]:
+                xrang = self.rngdmg * self.strength
+                enemyhealth -= xrang - enemydef
+                print(f"You landed a blow on the enemy! You dealt {xrang} damage! Enemy health: {enemyhealth}")
+                charhealth -= enemydmg
+                print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+            elif userinput == "Attack".lower() and classs == ["Mage"]:
+                xmag = self.mgcdmg * self.mana
+                enemyhealth -= xmag - enemydef
+                print(f"You landed a blow on the enemy! You dealt {xmag} damage! Enemy health: {enemyhealth}")
+                charhealth -= enemydmg
+                print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+            else:
+                print("Input not indentified, please try again.")
                 
 
 
