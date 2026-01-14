@@ -104,7 +104,7 @@ mobs = [
     ]
 
 class Class:
-    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped, strength, durability, defense, expamt, exp, level):
+    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped, strength, durability, defense, expamt, exp, level, health):
         self.name = name
         self.money = money
         self.hp = hp
@@ -122,6 +122,7 @@ class Class:
         self.level = level
         self.expamt = expamt
         self.exp = exp
+        self.health = health
     def human(self):
         self.money += 24
         self.hp += 99
@@ -218,42 +219,42 @@ class Class:
             userinput = input("What mob would you like to fight? Please type its number via list!")
             x = int(userinput)
             print(f"Would you like to fight the {mobs[x]['name']}?")
+            charhealth = int(self.health)
+            chardef = int(self.defense)
+            enemyhealth = int(mobs[x]['health'])
+            enemymoney = int(mobs[x]['money'])
+            enemyexp = int(mobs[x]['exp'])
+            enemydmg = int(mobs[x]['damage'])
+            enemydef = int(mobs[x]["def"])
             if userinput == "yes":
-                charhealth = int(self.health)
-                chardef = int(self.defense)
-                enemyhealth = int(mobs[x]['health'])
-                enemymoney = int(mobs[x]['money'])
-                enemyexp = int(mobs[x]['exp'])
-                enemydmg = int(mobs[x]['damage'])
-                enemydef = int(mobs[x]["def"])
-            while True:
-                userinput = input("Please choose an option: Attack, Inventory, Flee")
-                if enemyhealth <= 0:
-                    self.money += enemymoney
-                    self.exp += enemyexp
-                    return f"Well done! The {mobs[x]['name']} has been defeated! You have been rewarded with {enemyexp} and {enemymoney}"
-                elif charhealth <= 0:
-                    return f"The enemy has defeated you! Health remaining: {enemyhealth}"
-                elif userinput == "Attack".lower() and self.classs == ["Warrior"]:
-                    xwar = self.phydmg * ((self.strength * 0.1) + 1)
-                    enemyhealth -= xwar - enemydef
-                    print(f"You landed a blow on the enemy! You dealt {xwar} damage! Enemy health: {enemyhealth}")
-                    charhealth -= enemydmg - chardef
-                    print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
-                elif userinput == "Attack".lower() and self.classs == ["Archer"]:
-                    xrang = self.rngdmg * ((self.strength * 0.1) + 1)
-                    enemyhealth -= xrang - enemydef
-                    print(f"You landed a blow on the enemy! You dealt {xrang} damage! Enemy health: {enemyhealth}")
-                    charhealth -= enemydmg - chardef
-                    print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
-                elif userinput == "Attack".lower() and self.classs == ["Mage"]:
-                    xmag = self.mgcdmg * ((self.mana * 0.1) + 1)
-                    enemyhealth -= xmag - enemydef
-                    print(f"You landed a blow on the enemy! You dealt {xmag} damage! Enemy health: {enemyhealth}")
-                    charhealth -= enemydmg - chardef
-                    print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
-                else:
-                    print("Input not indentified, please try again.")
+                while True:
+                    userinput = input("Please choose an option: Attack, Inventory, Flee")
+                    if enemyhealth <= 0:
+                        self.money += enemymoney
+                        self.exp += enemyexp
+                        return f"Well done! The {mobs[x]['name']} has been defeated! You have been rewarded with {enemyexp} and {enemymoney}"
+                    elif charhealth <= 0:
+                        return f"The enemy has defeated you! Health remaining: {enemyhealth}"
+                    elif userinput == "Attack".lower() and self.classs == ["Warrior"]:
+                        xwar = self.phydmg * ((self.strength * 0.1) + 1)
+                        enemyhealth -= xwar - enemydef
+                        print(f"You landed a blow on the enemy! You dealt {xwar} damage! Enemy health: {enemyhealth}")
+                        charhealth -= enemydmg - chardef
+                        print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+                    elif userinput == "Attack".lower() and self.classs == ["Archer"]:
+                        xrang = self.rngdmg * ((self.strength * 0.1) + 1)
+                        enemyhealth -= xrang - enemydef
+                        print(f"You landed a blow on the enemy! You dealt {xrang} damage! Enemy health: {enemyhealth}")
+                        charhealth -= enemydmg - chardef
+                        print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+                    elif userinput == "Attack".lower() and self.classs == ["Mage"]:
+                        xmag = self.mgcdmg * ((self.mana * 0.1) + 1)
+                        enemyhealth -= xmag - enemydef
+                        print(f"You landed a blow on the enemy! You dealt {xmag} damage! Enemy health: {enemyhealth}")
+                        charhealth -= enemydmg - chardef
+                        print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+                    else:
+                        print("Input not indentified, please try again.")
 
     def levelsystem(self):
         if self.exp >= self.expamt:
@@ -272,7 +273,7 @@ class Class:
         else:
             print(f"Exp requirement not met: You need {self.expamt} total exp!")
 
-self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [], 0, 0, 0, 1, 100, 0)
+self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [], 0, 0, 0, 1, 100, 0, 100)
 
 
 
