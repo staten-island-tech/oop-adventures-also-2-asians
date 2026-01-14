@@ -50,9 +50,61 @@ resources=[
     }
 ]
 
+mobs = [
+    {
+    "name" : "bandit",
+    "damage" : 4,
+    "health" : 25,
+    "def" : 0,
+    "exp" : 10,
+    "money" : 5
+},
+{
+    "name" : "rouge",
+    "damage" : 6,
+    "health" : 20,
+    "def" : 0,
+    "exp" : 12
+},
+{
+    "name" : "Outcast",
+    "damage" : 2,
+    "health" : 10,
+    "def" : -1,
+    "exp" : 5
+},
+{
+    "name" : "Squire",
+    "damage" : 5,
+    "health" : 25,
+    "def" : 2,
+    "exp" : 20
+},
+{
+    "name" : "Guard",
+    "damage" : 7,
+    "health" : 50,
+    "def" : 3,
+    "exp" : 30
+},
+{
+    "name" : "Knight",
+    "damage" : 10,
+    "health" : 100,
+    "def" : 5,
+    "exp" : 50
+},
+{
+    "name" : "Royal Guard",
+    "damage" : 12,
+    "health" : 250, 
+    "def" : 7,
+    "exp" : 125
+}
+    ]
 
 class Class:
-    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped):
+    def __init__(self, name, money, hp, phydmg, rngdmg, mgcdmg, mana, inv, race, classs, equipped, strength, durability, defense, expamt, exp, level):
         self.name = name
         self.money = money
         self.hp = hp
@@ -64,6 +116,12 @@ class Class:
         self.race = race
         self.classs = classs
         self.equipped = equipped
+        self.strength = strength
+        self.durability = durability
+        self.defense = defense
+        self.level = level
+        self.expamt = expamt
+        self.exp = exp
     def human(self):
         self.money += 24
         self.hp += 99
@@ -113,10 +171,6 @@ class Class:
     
     def equipping(self):
         #Switching Equipped Weapon(SEW)
-        self.phydmg*0.1+1
-        self.rngdmg*0.1+1
-        self.mgcdmg*0.1+1
-        
         print("Which weapon do you wanna equip?")
         for index, i in enumerate(self.inv, start=1): 
             if i['genre'] == "weapon":
@@ -136,9 +190,12 @@ class Class:
 
         for x in weapontype:
             if choice==x['name'] and x['genre']=="weapon":
-                if len(self.equipped) >
+                if len(self.equipped) == 1:
+                    self.phydmg - x['phydmg']
+                    self.rngdmg-x['rngdmg']
+                    self.mgcdmg-x['mgcdmg']
+                    self.equipped.pop(0)
                 self.equipped.append(x)
-                print(self.phydmg,self.rngdmg,self.mgcdmg)
                 self.phydmg + x['phydmg']
                 self.rngdmg+x['rngdmg']
                 self.mgcdmg+x['mgcdmg']
@@ -154,9 +211,68 @@ class Class:
         if self.equipped['name']==weapontype[2]['name']:
             print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[2]['name']}")
     #def genstore():
-    
-        
-self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [])
+
+    def killfunc(self):
+        for index, i in enumerate(mobs):
+            print(f"{index}. {i}")
+            userinput = input("What mob would you like to fight? Please type its number via list!")
+            x = int(userinput)
+            print(f"Would you like to fight the {mobs[x]['name']}?")
+            if userinput == "yes":
+                charhealth = int(self.health)
+                chardef = int(self.defense)
+                enemyhealth = int(mobs[x]['health'])
+                enemymoney = int(mobs[x]['money'])
+                enemyexp = int(mobs[x]['exp'])
+                enemydmg = int(mobs[x]['damage'])
+                enemydef = int(mobs[x]["def"])
+            while True:
+                userinput = input("Please choose an option: Attack, Inventory, Flee")
+                if enemyhealth <= 0:
+                    self.money += enemymoney
+                    self.exp += enemyexp
+                    return f"Well done! The {mobs[x]['name']} has been defeated! You have been rewarded with {enemyexp} and {enemymoney}"
+                elif charhealth <= 0:
+                    return f"The enemy has defeated you! Health remaining: {enemyhealth}"
+                elif userinput == "Attack".lower() and self.classs == ["Warrior"]:
+                    xwar = self.phydmg * ((self.strength * 0.1) + 1)
+                    enemyhealth -= xwar - enemydef
+                    print(f"You landed a blow on the enemy! You dealt {xwar} damage! Enemy health: {enemyhealth}")
+                    charhealth -= enemydmg - chardef
+                    print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+                elif userinput == "Attack".lower() and self.classs == ["Archer"]:
+                    xrang = self.rngdmg * ((self.strength * 0.1) + 1)
+                    enemyhealth -= xrang - enemydef
+                    print(f"You landed a blow on the enemy! You dealt {xrang} damage! Enemy health: {enemyhealth}")
+                    charhealth -= enemydmg - chardef
+                    print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+                elif userinput == "Attack".lower() and self.classs == ["Mage"]:
+                    xmag = self.mgcdmg * ((self.mana * 0.1) + 1)
+                    enemyhealth -= xmag - enemydef
+                    print(f"You landed a blow on the enemy! You dealt {xmag} damage! Enemy health: {enemyhealth}")
+                    charhealth -= enemydmg - chardef
+                    print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+                else:
+                    print("Input not indentified, please try again.")
+
+    def levelsystem(self):
+        if self.exp >= self.expamt:
+            level += 1
+            self.exp -= self.expamt
+            self.expamt * 1.1
+            user_input = input("You have met the level requirements! Where would you like to put your stat points?")
+            if user_input.lower() == "strength":
+                self.strength += 1
+            elif user_input.lower() == "defense":
+                self.defense += 1
+            elif user_input.lower() == "durability":
+                self.durability += 1
+            elif user_input.lower() == "mana":
+                self.mana += 1
+        else:
+            print(f"Exp requirement not met: You need {self.expamt} total exp!")
+
+self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [], 0, 0, 0, 1, 100, 0)
 
 
 
@@ -194,13 +310,32 @@ while True:
         print("Class Chosen: Mage")
         break
 
+while True:
+    print("Welcome to the game! Please type 'info' for a introduction to the game. Otherwise, enjoy!")
+    user_input = input("What would you like to do? (Shop, Attack, Leveling, Equip, Stats)")
+    if user_input.lower() == "shop":
+        self.weaponshop()
+    elif user_input.lower() == "attack":
+        self.killfunc()
+    elif user_input.lower() == "leveling":
+        self.levelsystem()
+    elif user_input.lower() == "equip":
+        self.equipping()
+    elif user_input.lower() == "stats":
+        self.stats()
+    else:
+        print("unknown command, try again")
+
+
+
+                
 
 #_________________________________________________________________________________________
-while True:
+""" while True:
     user_input = input("x")
     if user_input== "x":
         self.weaponshop()
-        self.equipping()
+        self.equipping() """
 
 #using this(below) to help
 # Word Problem: The School Portal Login System
