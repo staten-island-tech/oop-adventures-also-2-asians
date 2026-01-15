@@ -5,7 +5,6 @@
 #IMPROVING LEVEL SYSTEM + REARRANGED LEVEL SYSTEM IN A WAY THAT DOESN'T REQUIRE MANUAL LEVELING (ill work on this on the 15th, moving down to 'while True' loop to ensure its checked over)
 #FIX KILLFUNC (>!<) - done
 #ENSURING ALL CODE WORKS (kill func works now, not too sure whether it will be effective with other upcoming script)
-#ADD WEAPON LOCKS FOR CERTAIN CLASSES
 
 #I believe these are our main focuses for now, as changes to QOL will take too much time, we'll see how it goes tommorrow - priority should remain on improving existing functions
 #I also need to fix up kill func a little more (3:)
@@ -151,13 +150,11 @@ class Class:
         self.money += 9
         self.hp += 74
         self.phydmg += 1
-        self.mana += 5
         self.race.append("Demon")
     def angel(self):
         self.money += 9
         self.hp += 99
         self.mgcdmg += 1
-        self.mana += 15
         self.race.append("Angel")
     def dwarf(self):
         self.money += 24
@@ -223,7 +220,6 @@ class Class:
         print(f"currently equipped: {self.equipped}")
 
     def smithy(self):
-        upgradecounter=0
         if self.equipped['name']==weapontype[0]['name']:
             print(f"if you wanna upgrade your current weapon you will need enough resources: {10} {resources[0]['name']}")
         if self.equipped['name']==weapontype[1]['name']:
@@ -247,14 +243,14 @@ class Class:
             enemydmg = int(mobs[x]['damage'])
             enemydef = int(mobs[x]["def"])
             while True:
-                userinput = input("Please choose an option: Attack, Inventory, Flee (Inventory is incompelte, disregard)")
                 if enemyhealth <= 0:
                     self.money += enemymoney
                     self.exp += enemyexp
                     return f"Well done! The {mobs[x]['name']} has been defeated! You have been rewarded with {enemyexp} and {enemymoney}"
-                elif charhealth <= 0:
+                if charhealth <= 0:
                     return f"The enemy has defeated you! Health remaining: {enemyhealth}"
-                elif userinput == "Attack".lower() and self.classs == ["Warrior"]:
+                userinput = input("Please choose an option: Attack, Inventory, Flee (Inventory is incompelte, disregard)")
+                if userinput == "Attack".lower() and self.classs == ["Warrior"]:
                     xwar = self.phydmg * ((self.strength * 0.1) + 1)
                     enemyhealth -= xwar - enemydef
                     print(f"You landed a blow on the enemy! You dealt {xwar} damage! Enemy health: {enemyhealth}")
@@ -279,8 +275,10 @@ class Class:
                     return "You ran off!"
                 else:
                     print("Input not indentified, please try again.")
+    def stats(self):
+        print(f"Money: {self.money},Hp: {self.hp}, Phydmg: {self.phydmg}, Rngdmg: {self.rngdmg}, Mgcdmg: {self.mgcdmg}")
 
-    def levelsystem(self):
+"""     def levelsystem(self):
         if self.exp >= self.expamt:
             level += 1
             self.exp -= self.expamt
@@ -295,7 +293,7 @@ class Class:
             elif user_input.lower() == "mana":
                 self.mana += 1
         else:
-            print(f"Exp requirement not met: You need {self.expamt} total exp!")
+            print(f"Exp requirement not met: You need {self.expamt} total exp!") """
 
 self = Class("John", 1, 1, 1, 0, 0, 0, [], [], [], [], 0, 0, 0, 1, 100, 0, 100)
 
@@ -337,6 +335,21 @@ while True:
 
 print("Welcome to the game! Please type 'info' for a introduction to the game. Otherwise, enjoy!")
 while True:
+    if self.exp >= self.expamt:
+            level += 1
+            self.exp -= self.expamt
+            self.expamt * 1.1
+            user_input = input("You have met the level requirements! Where would you like to put your stat points?")
+            if user_input.lower() == "strength":
+                self.strength += 1
+            elif user_input.lower() == "defense":
+                self.defense += 1
+            elif user_input.lower() == "durability":
+                self.durability += 1
+            elif user_input.lower() == "mana":
+                self.mana += 1
+            else:
+                print(f"Exp requirement not met: You need {self.expamt} total exp!")
     user_input = input("What would you like to do? (Shop, Attack, Leveling, Equip, Stats(stats imcomplete))")
     if user_input.lower() == "shop":
         self.weaponshop()
