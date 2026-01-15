@@ -1,4 +1,17 @@
 
+
+
+#MAIN FOCUSES:
+#IMPROVING LEVEL SYSTEM + REARRANGED LEVEL SYSTEM IN A WAY THAT DOESN'T REQUIRE MANUAL LEVELING (ill work on this on the 15th, moving down to 'while True' loop to ensure its checked over)
+#FIX KILLFUNC (>!<) - done
+#ENSURING ALL CODE WORKS (kill func works now, not too sure whether it will be effective with other upcoming script)
+#ADD WEAPON LOCKS FOR CERTAIN CLASSES
+
+#I believe these are our main focuses for now, as changes to QOL will take too much time, we'll see how it goes tommorrow - priority should remain on improving existing functions
+#I also need to fix up kill func a little more (3:)
+
+
+
 weapontype=[
     {
         "name": "rusty sword",
@@ -52,6 +65,14 @@ resources=[
 
 mobs = [
     {
+    "name" : "Outcast",
+    "damage" : 2,
+    "health" : 10,
+    "def" : -1,
+    "exp" : 5,
+    "money" : 1
+},
+{
     "name" : "bandit",
     "damage" : 4,
     "health" : 25,
@@ -64,42 +85,40 @@ mobs = [
     "damage" : 6,
     "health" : 20,
     "def" : 0,
-    "exp" : 12
-},
-{
-    "name" : "Outcast",
-    "damage" : 2,
-    "health" : 10,
-    "def" : -1,
-    "exp" : 5
+    "exp" : 12,
+    "money" : 10
 },
 {
     "name" : "Squire",
     "damage" : 5,
     "health" : 25,
     "def" : 2,
-    "exp" : 20
+    "exp" : 20,
+    "money" : 15
 },
 {
     "name" : "Guard",
     "damage" : 7,
     "health" : 50,
     "def" : 3,
-    "exp" : 30
+    "exp" : 30,
+    "money" : 25 
 },
 {
     "name" : "Knight",
     "damage" : 10,
     "health" : 100,
     "def" : 5,
-    "exp" : 50
+    "exp" : 50,
+    "money" : 40
 },
 {
     "name" : "Royal Guard",
     "damage" : 12,
     "health" : 250, 
     "def" : 7,
-    "exp" : 125
+    "exp" : 125,
+    "money" : 100
 }
     ]
 
@@ -228,7 +247,7 @@ class Class:
             enemydmg = int(mobs[x]['damage'])
             enemydef = int(mobs[x]["def"])
             while True:
-                userinput = input("Please choose an option: Attack, Inventory, Flee")
+                userinput = input("Please choose an option: Attack, Inventory, Flee (Inventory is incompelte, disregard)")
                 if enemyhealth <= 0:
                     self.money += enemymoney
                     self.exp += enemyexp
@@ -239,23 +258,25 @@ class Class:
                     xwar = self.phydmg * ((self.strength * 0.1) + 1)
                     enemyhealth -= xwar - enemydef
                     print(f"You landed a blow on the enemy! You dealt {xwar} damage! Enemy health: {enemyhealth}")
-                    print("----------------------------------")
+                    print("-------------------------------------")
                     charhealth -= enemydmg - chardef
                     print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
                 elif userinput == "Attack".lower() and self.classs == ["Archer"]:
                     xrang = self.rngdmg * ((self.strength * 0.1) + 1)
                     enemyhealth -= xrang - enemydef
                     print(f"You landed a blow on the enemy! You dealt {xrang} damage! Enemy health: {enemyhealth}")
-                    print("----------------------------------")
+                    print("-------------------------------------")
                     charhealth -= enemydmg - chardef
                     print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
                 elif userinput == "Attack".lower() and self.classs == ["Mage"]:
                     xmag = self.mgcdmg * ((self.mana * 0.1) + 1)
                     enemyhealth -= xmag - enemydef
                     print(f"You landed a blow on the enemy! You dealt {xmag} damage! Enemy health: {enemyhealth}")
-                    print("----------------------------------")
+                    print("-------------------------------------")
                     charhealth -= enemydmg - chardef
                     print(f"{mobs[x]['name']} has attacked! Character health: {charhealth}")
+                elif user_input == "Flee".lower():
+                    return "You ran off!"
                 else:
                     print("Input not indentified, please try again.")
 
@@ -316,7 +337,7 @@ while True:
 
 print("Welcome to the game! Please type 'info' for a introduction to the game. Otherwise, enjoy!")
 while True:
-    user_input = input("What would you like to do? (Shop, Attack, Leveling, Equip, Stats)")
+    user_input = input("What would you like to do? (Shop, Attack, Leveling, Equip, Stats(stats imcomplete))")
     if user_input.lower() == "shop":
         self.weaponshop()
     elif user_input.lower() == "attack":
